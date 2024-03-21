@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
     const [theme, setTheme] = useState('light')
-
-    useEffect(()=>{
-        localStorage.setItem('theme',theme)
-        const localTheme = localStorage.getItem('theme')
-        document.querySelector('html').setAttribute('data-theme',localTheme)
-    },[theme])
 
     const handleToggle = (e) =>{
         if(e.target.checked){
@@ -17,19 +12,29 @@ const NavBar = () => {
             setTheme('light')
         }
     }
+
+    useEffect(()=>{
+        localStorage.setItem('theme',theme)
+        const localTheme = localStorage.getItem('theme')
+        document.querySelector('html').setAttribute('data-theme',localTheme)
+    },[theme])
+
+
     console.log(theme)
     return (
-        <div className="navbar bg-base-100 shadow-lg px-16 fixed z-10">
+        <div className="navbar bg-base-100 shadow-lg px-16 fixed z-10 h-16">
             <div className="flex-1">
-                <a className="btn btn-ghost gap-0 text-secondary text-2xl">Byte<span className="text-primary">Blaze</span></a>
+            <Link to={'/'} className="btn btn-ghost gap-0 text-secondary text-2xl">
+                Byte<span className="text-primary">Blaze</span>
+            </Link>
             </div>
             <div className="flex-none">
-                <ul className="menu menu-horizontal px-1">
-                    <li className="font-bold"><a>Home</a></li>
-                    <li className="font-bold text-primary"><a>Blogs</a></li>
-                    <li className="font-bold"><a>Bookmarks</a></li>
+                <ul className="menu menu-horizontal px-1 hidden sm:flex gap-5 items-center">
+                    <NavLink to={'/'} className={({isActive})=> isActive? 'text-primary font-bold' : 'font-bold'}>Home</NavLink>
+                    <NavLink to={'/blogs'} className={({isActive})=> isActive? 'text-primary font-bold' : 'font-bold'}>Blogs</NavLink>
+                    <NavLink to={'/bookmarks'} className={({isActive})=> isActive? 'text-primary font-bold' : 'font-bold'}>Bookmarks</NavLink>
                 </ul>
-                <label className="cursor-pointer grid place-items-center">
+                <label className="cursor-pointer grid place-items-center ml-2">
 
                     <input onChange={handleToggle} type="checkbox" value="synthwave" className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
 
