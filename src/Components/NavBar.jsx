@@ -22,7 +22,7 @@ const NavBar = () => {
 
     console.log(theme)
     return (
-        <div className="navbar bg-base-100 shadow-lg px-16 fixed z-10 h-16">
+        <div className="navbar bg-base-100 shadow-lg px-4 sm:px-8 fixed z-10 h-16">
             <div className="flex-1">
             <Link to={'/'} className="btn btn-ghost gap-0 text-secondary text-2xl">
                 Byte<span className="text-primary">Blaze</span>
